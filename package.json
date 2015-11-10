@@ -1,6 +1,6 @@
 {
     "name": "joumae-users",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "The joumae users module",
     "author": "Yusuke Kuoka <yusuke.kuoka@crowdworks.co.jp>",
     "repository": {
@@ -8,6 +8,9 @@
         "url": "https://github.com/crowdworks/joumae-users.git"
     },
     "keywords": [],
+    "scripts": {
+      "postinstall" : "jaws postinstall joumae-users npm"
+    },
     "devDependencies": {},
     "dependencies": {
       "jaws-core-js": "~0.0.2",
