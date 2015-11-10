@@ -1,0 +1,26 @@
+{
+    "name": "joumae-users",
+    "version": "0.0.1",
+    "description": "The joumae users module",
+    "author": "Yusuke Kuoka <yusuke.kuoka@crowdworks.co.jp>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/crowdworks/joumae-users.git"
+    },
+    "keywords": [],
+    "devDependencies": {},
+    "dependencies": {
+      "jaws-core-js": "~0.0.2",
+      "async": "^1.2.1",
+      "aws-sdk": "^2.1.32",
+      "bcryptjs": "^2.2.0",
+      "dotenv": "^1.2.0",
+      "dynamodb-doc": "^1.0.0",
+      "jsonwebtoken": "^5.0.4",
+      "lodash": "^3.9.3",
+      "moment": "^2.10.3",
+      "node-uuid": "^1.4.3",
+      "shortid": "^2.2.2",
+      "bluebird": "^3.0.5"
+    }
+}

@@ -1,0 +1,63 @@
+{
+  "lambda": {
+    "envVars": [],
+    "deploy": true,
+    "package": {
+      "optimize": {
+        "builder": "browserify",
+        "minify": true,
+        "ignore": [],
+        "exclude": [
+          "aws-sdk"
+        ],
+        "includePaths": []
+      },
+      "excludePatterns": []
+    },
+    "cloudFormation": {
+      "Description": "",
+      "Handler": "aws_modules/joumae-users/show/handler.handler",
+      "MemorySize": 1024,
+      "Runtime": "nodejs",
+      "Timeout": 6
+    }
+  },
+  "apiGateway": {
+    "deploy": false,
+    "cloudFormation": {
+      "Type": "AWS",
+      "Path": "users/show",
+      "Method": "POST",
+      "AuthorizationType": "none",
+      "ApiKeyRequired": false,
+      "RequestTemplates": {
+        "application/json": "{\"params\":\"$input.params()\", \"body\":$input.json('$')}"
+      },
+      "RequestParameters": {},
+      "Responses": {
+        "\\{\"status\":4.*": {
+          "statusCode": "400",
+          "responseParameters": {},
+          "responseTemplates": {
+            "application/json": "$input.path('$.errorMessage')"
+          }
+        },
+        "\\{\"status\":5.*": {
+          "statusCode": "500",
+          "responseParameters": {},
+          "responseTemplates": {
+            "application/json": "$input.path('$.errorMessage')"
+          }
+        },
+        "default": {
+          "statusCode": "200",
+          "responseParameters": {},
+          "responseModels": {},
+          "responseTemplates": {
+            "application/json": ""
+          }
+        }
+      }
+    }
+  }
+}

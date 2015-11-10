@@ -1,0 +1,68 @@
+{
+  "name": "joumae-users",
+  "version": "0.0.1",
+  "location": "https://github.com/crowdworks/joumae-users",
+  "author": "",
+  "description": "",
+  "resources": {
+    "cloudFormation": {
+      "LambdaIamPolicyDocumentStatements": [
+        {
+           "Effect": "Allow",
+           "Action": [ "*" ],
+           "Resource": {
+             "Fn::Join": [
+               ":",
+               [ "arn:aws:dynamodb", { "Ref": "AWS::Region" }, "*", { "Fn::Join": ["-", ["table/", { "Ref": "aaProjectName" }, { "Ref": "aaDataModelStage" }, "users"]] } ]
+             ]
+           }
+         }
+      ],
+      "ApiGatewayIamPolicyDocumentStatements": [],
+      "Resources": {
+        "UsersDynamoDBTable": {
+          "Type" : "AWS::DynamoDB::Table",
+          "Properties": {
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "_id",
+                "AttributeType": "S"
+              },
+              {
+                "AttributeName": "email",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema" : [
+              {
+                "AttributeName": "_id",
+                "KeyType": "HASH"
+              }
+            ],
+            "GlobalSecondaryIndexes" : [{
+              "IndexName" : "email-index",
+              "KeySchema" : [
+                {
+                  "AttributeName" : "email",
+                  "KeyType" : "HASH"
+                }
+              ],                         
+              "Projection" : {
+                "ProjectionType" : "ALL"
+              },
+              "ProvisionedThroughput" : {
+                "ReadCapacityUnits":  { "Ref" : "aaDefaultDynamoRWThroughput" },
+                "WriteCapacityUnits": { "Ref" : "aaDefaultDynamoRWThroughput" }
+              }
+            }],
+            "ProvisionedThroughput" : {
+              "ReadCapacityUnits":  { "Ref" : "aaDefaultDynamoRWThroughput" },
+              "WriteCapacityUnits": { "Ref" : "aaDefaultDynamoRWThroughput" }
+            },
+            "TableName": { "Fn::Join": ["-", [{ "Ref": "aaProjectName" }, { "Ref": "aaDataModelStage" }, "users"]] }
+          }
+        }
+      }
+    }
+  }
+}
