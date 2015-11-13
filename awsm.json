@@ -1,6 +1,6 @@
 {
   "name": "joumae-users",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "location": "https://github.com/crowdworks/joumae-users",
   "author": "",
   "description": "",
@@ -13,7 +13,29 @@
            "Resource": {
              "Fn::Join": [
                ":",
-               [ "arn:aws:dynamodb", { "Ref": "AWS::Region" }, "*", { "Fn::Join": ["-", ["table/", { "Ref": "aaProjectName" }, { "Ref": "aaDataModelStage" }, "users"]] } ]
+               [
+                 "arn:aws:dynamodb",
+                 { "Ref": "AWS::Region" },
+                 "*",
+                 {
+                   "Fn::Join": [
+                     "",
+                     [
+                       "table/",
+                       {
+                         "Fn::Join": [
+                           "-",
+                           [
+                             { "Ref": "aaProjectName" },
+                             { "Ref": "aaDataModelStage" },
+                             "users"
+                           ]
+                         ]
+                       }
+                     ]
+                   ]
+                 }
+               ]
              ]
            }
          }

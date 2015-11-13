@@ -1,6 +1,6 @@
 {
     "name": "joumae-users",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "The joumae users module",
     "author": "Yusuke Kuoka <yusuke.kuoka@crowdworks.co.jp>",
     "repository": {
